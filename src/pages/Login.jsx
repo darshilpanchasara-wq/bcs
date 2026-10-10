@@ -60,13 +60,13 @@ const Login = () => {
           <img
             src="/assets/bcs-logo.png"
             alt="SHREE BHUVNESHWARI CAKE & SNACKS"
-            className="h-16 w-auto object-contain rounded-xl border border-amber-300/40 shadow-sm mb-1"
+            className="h-10 w-10 object-contain rounded-full border border-amber-300/40 shadow-sm mb-1"
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = '/assets/logo.png';
             }}
           />
-          <h1 className="font-headline text-xl sm:text-2xl font-black text-on-surface">
+          <h1 className="font-headline text-xl sm:text-2xl font-black uppercase tracking-wider text-on-surface">
             SHREE BHUVNESHWARI CAKE & SNACKS
           </h1>
           <p className="font-body text-xs text-secondary">

@@ -50,8 +50,8 @@ export default {
         "on-error-container": "#93000a",
       },
       fontFamily: {
-        "display": ["'Playfair Display'", "serif"],
-        "headline": ["'Playfair Display'", "serif"],
+        "display": ["'Plus Jakarta Sans'", "sans-serif"],
+        "headline": ["'Plus Jakarta Sans'", "sans-serif"],
         "body": ["'Plus Jakarta Sans'", "sans-serif"],
         "sans": ["'Plus Jakarta Sans'", "sans-serif"]
       },

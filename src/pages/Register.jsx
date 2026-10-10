@@ -44,13 +44,13 @@ const Register = () => {
           <img
             src="/assets/bcs-logo.png"
             alt="BHUVNESHWARI CAKES"
-            className="h-16 w-16 rounded-full object-cover border border-amber-300/40 shadow-sm mb-1"
+            className="h-10 w-10 rounded-full object-cover border border-amber-300/40 shadow-sm mb-1"
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = '/assets/logo.png';
             }}
           />
-          <h1 className="font-headline text-2xl sm:text-3xl font-bold text-on-surface">
+          <h1 className="font-headline text-2xl sm:text-3xl font-bold uppercase tracking-wide text-on-surface">
             Create an Account
           </h1>
           <p className="font-body text-xs text-secondary">

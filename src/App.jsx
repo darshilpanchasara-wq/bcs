@@ -10,6 +10,7 @@ import MobileBottomNav from './components/common/MobileBottomNav';
 import Footer from './components/common/Footer';
 import WhatsAppChatbot from './components/common/WhatsAppChatbot';
 import ProtectedRoute from './components/common/ProtectedRoute';
+import ScrollToTop from './components/common/ScrollToTop';
 
 // Public Pages
 import Home from './pages/Home';
@@ -47,7 +48,7 @@ const AppLayout = () => {
     <div className="min-h-screen flex flex-col bg-surface text-on-surface">
       {!isAdminRoute && <Navbar />}
 
-      <main className={`flex-1 ${!isAdminRoute ? 'pt-24 sm:pt-28' : ''}`}>
+      <main className={`flex-1 ${!isAdminRoute ? 'pt-16' : ''}`}>
         <Routes>
           {/* Public Storefront Routes */}
           <Route path="/" element={<Home />} />
@@ -125,6 +126,7 @@ function App() {
       <AuthProvider>
         <CartProvider>
           <Router>
+            <ScrollToTop />
             <AppLayout />
           </Router>
         </CartProvider>

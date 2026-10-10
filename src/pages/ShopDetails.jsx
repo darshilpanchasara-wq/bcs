@@ -16,7 +16,7 @@ const ShopDetails = () => {
           SHREE BHUVNESHWARI CAKE & SNACKS
         </h1>
         <p className="font-body text-base sm:text-lg text-secondary mt-3 leading-relaxed">
-          Dhrol & Jamnagar’s premier destination for artisan pure-vegetarian celebration cakes, luxury engagement couture, and warm freshly baked Gujarati & Continental snacks.
+          Dhrol & Jamnagar’s premier destination for artisan pure-vegetarian celebration cakes, designer custom bakes, and warm freshly baked Gujarati & Continental snacks.
         </p>
       </div>
 
@@ -128,7 +128,7 @@ const ShopDetails = () => {
               "At <strong className="text-on-surface">SHREE BHUVNESHWARI CAKE & SNACKS</strong>, our philosophy is anchored in pure ingredients, traditional warmth, and high-fashion confectionery artistry. Every sponge, cream whip, and savory puff that leaves our kitchen is 100% vegetarian, prepared with the finest Amul dairy butter, real saffron, and Belgian chocolate."
             </p>
             <p className="font-body text-sm text-secondary leading-relaxed">
-              Darshil personally oversees the design of every custom Engagement and Sugar Paste Cake tier, ensuring each creation is not only a centerpiece of visual wonder but also an unforgettable culinary delight for your loved ones.
+              Darshil personally oversees the design of every custom celebration cake tier, ensuring each creation is not only a centerpiece of visual wonder but also an unforgettable culinary delight for your loved ones.
             </p>
             <div className="flex flex-wrap gap-3 mt-2">
               <span className="px-3 py-1 rounded-full bg-white border border-outline-variant/60 text-xs font-semibold text-on-surface flex items-center gap-1.5">
@@ -214,9 +214,9 @@ const ShopDetails = () => {
 
         <div className="p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/60 shadow-sm flex flex-col gap-2">
           <span className="material-symbols-outlined text-[32px] text-amber-600">diamond</span>
-          <h3 className="font-headline text-lg font-bold text-on-surface">Engagement & Sugar Paste</h3>
+          <h3 className="font-headline text-lg font-bold text-on-surface">Artisanal Designer Bakes</h3>
           <p className="text-xs text-secondary leading-relaxed">
-            Grand multi-tier wedding and ring ceremony centerpieces designed with gold foil & handcrafted sugar florals.
+            Grand multi-tier wedding and celebration centerpieces designed with gold foil & handcrafted florals.
           </p>
         </div>
 

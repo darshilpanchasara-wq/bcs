@@ -64,27 +64,27 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 py-12">
           {/* Brand Info */}
           <div className="md:col-span-4 flex flex-col gap-4">
-            <Link to="/" className="flex items-center gap-2.5">
+            <Link to="/" className="flex items-center gap-2">
               <img
                 src="/assets/bcs-logo.png"
                 alt="BHUVNESHWARI CAKES BCS Logo"
-                className="h-12 w-12 rounded-full object-cover border border-amber-300/40 shadow-sm"
+                className="h-9 w-9 rounded-full object-cover border border-amber-300/40 shadow-sm"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = '/assets/logo.png';
                 }}
               />
               <div className="flex flex-col">
-                <span className="font-headline text-lg font-black tracking-tight text-on-surface">
+                <span className="font-headline text-base font-black tracking-wider uppercase text-on-surface">
                   SHREE BHUVNESHWARI
                 </span>
-                <span className="text-[10px] tracking-wider uppercase font-bold text-primary">
+                <span className="text-[9px] tracking-wider uppercase font-bold text-primary">
                   CAKE & SNACKS • 100% EGGLESS
                 </span>
               </div>
             </Link>
-            <p className="font-body text-sm text-secondary leading-relaxed max-w-sm">
-              Dhrol & Jamnagar’s premier confectionery specializing in pure vegetarian couture cakes, royal Engagement tiers, handcrafted Sugar Paste designs, and hot savory bakery snacks. Founded by <strong className="text-on-surface">Darshil Panchasara</strong>.
+            <p className="font-body text-xs sm:text-sm text-secondary leading-relaxed max-w-sm">
+              Dhrol & Jamnagar’s premier confectionery specializing in pure vegetarian couture celebration cakes, unique interactive smash cakes, and hot savory bakery snacks. Founded by <strong className="text-on-surface">Darshil Panchasara</strong>.
             </p>
             <div className="flex items-center gap-3 pt-2 text-secondary">
               <span className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:text-primary transition-colors cursor-pointer">
@@ -101,12 +101,12 @@ const Footer = () => {
 
           {/* Occasions / Shop */}
           <div className="md:col-span-3 flex flex-col gap-3">
-            <h4 className="font-headline text-base font-bold text-on-surface">Speciality Categories</h4>
+            <h4 className="font-headline text-xs sm:text-sm font-bold uppercase tracking-wider text-on-surface">Speciality Categories</h4>
             <ul className="flex flex-col gap-2 text-sm text-secondary">
-              <li><Link to="/shop?category=engagement" className="hover:text-primary transition-colors font-semibold text-primary">💍 Engagement Cakes</Link></li>
-              <li><Link to="/shop?category=sugarpaste" className="hover:text-primary transition-colors font-semibold text-primary">🎂 Sugar Paste Cakes</Link></li>
+              <li><Link to="/shop?category=theme" className="hover:text-primary transition-colors font-semibold text-primary">🎨 Theme Based Cakes</Link></li>
+              <li><Link to="/shop?category=premium" className="hover:text-primary transition-colors font-semibold text-primary">⭐ Premium Flavours</Link></li>
               <li><Link to="/shop?category=fusion" className="hover:text-primary transition-colors">Rasmalai & Indian Fusion</Link></li>
-              <li><Link to="/shop?category=birthday" className="hover:text-primary transition-colors">Birthday Cakes</Link></li>
+              <li><Link to="/shop?category=celebration" className="hover:text-primary transition-colors">Celebration Cakes</Link></li>
               <li><Link to="/shop?category=chocolate" className="hover:text-primary transition-colors">Belgian Truffle & Chocolate</Link></li>
               <li><Link to="/custom-order" className="hover:text-primary transition-colors">Custom Designer Order</Link></li>
             </ul>
@@ -114,7 +114,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="md:col-span-2 flex flex-col gap-3">
-            <h4 className="font-headline text-base font-bold text-on-surface">Explore</h4>
+            <h4 className="font-headline text-xs sm:text-sm font-bold uppercase tracking-wider text-on-surface">Explore</h4>
             <ul className="flex flex-col gap-2 text-sm text-secondary">
               <li><Link to="/shop-details" className="hover:text-primary transition-colors font-semibold text-primary">Shop Details</Link></li>
               <li><Link to="/contact" className="hover:text-primary transition-colors">Contact & Location</Link></li>
@@ -126,7 +126,7 @@ const Footer = () => {
 
           {/* Store Info & Newsletter */}
           <div className="md:col-span-3 flex flex-col gap-4">
-            <h4 className="font-headline text-base font-bold text-on-surface">Bhuvneshwari Club</h4>
+            <h4 className="font-headline text-xs sm:text-sm font-bold uppercase tracking-wider text-on-surface">Bhuvneshwari Club</h4>
             <p className="font-body text-xs text-secondary">
               Subscribe for festive discounts, Diwali hampers, and secret seasonal flavors.
             </p>

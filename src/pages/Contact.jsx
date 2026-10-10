@@ -26,8 +26,8 @@ const Contact = () => {
 
   const faqs = [
     {
-      q: 'How far in advance should I order Engagement and Sugar Paste Cakes?',
-      a: 'For signature catalog cakes, orders can be placed same-day or 24 hours in advance. For royal multi-tier Engagement Cakes and handcrafted Sugar Paste creations, we recommend booking 3 to 7 days in advance so Chef Darshil Panchasara can customize each tier to perfection.'
+      q: 'How far in advance should I order custom celebration cakes?',
+      a: 'For signature catalog cakes, orders can be placed same-day or 24 hours in advance. For grand multi-tier designer celebration cakes, we recommend booking 2 to 3 days in advance so Chef Darshil Panchasara can customize each tier to perfection.'
     },
     {
       q: 'Are all your cakes and snacks 100% Pure Vegetarian (Eggless)?',
@@ -61,7 +61,7 @@ const Contact = () => {
           Connect With Bhuvneshwari Cakes
         </h1>
         <p className="font-body text-sm sm:text-base text-secondary mt-2">
-          Have an upcoming engagement, wedding, birthday celebration, or bulk snack order? Reach out to owner <strong className="text-on-surface">Darshil Panchasara</strong> and our team.
+          Have an upcoming celebration, birthday party, wedding, or bulk snack order? Reach out to owner <strong className="text-on-surface">Darshil Panchasara</strong> and our team.
         </p>
       </div>
 
@@ -133,7 +133,7 @@ const Contact = () => {
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   className="w-full h-11 px-3.5 mt-1 rounded-xl bg-surface-container-low text-on-surface text-sm border border-outline-variant/60 outline-none focus:border-primary"
                 >
-                  <option>Engagement & Sugar Paste Cake Consultation</option>
+                  <option>Custom Designer Cake Consultation</option>
                   <option>Order Support & Delivery Tracking</option>
                   <option>Party Snacks & Bulk Catering</option>
                   <option>Custom Birthday / Milestone Cake</option>

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../api/axios';
+import { clientStore } from '../api/clientStore';
 import { useToast } from './ToastContext';
 
 const AuthContext = createContext(null);
@@ -16,13 +17,20 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         try {
           const res = await api.get('/auth/me');
-          if (res.data.success) {
+          if (res && res.data && res.data.success) {
             setUser(res.data.user);
+          } else {
+            const localUser = clientStore.getCurrentUser();
+            setUser(localUser);
           }
         } catch (err) {
-          console.warn('Session expired or invalid:', err.message);
-          localStorage.removeItem('sweetcrumbs_token');
-          setUser(null);
+          const localUser = clientStore.getCurrentUser();
+          if (localUser) {
+            setUser(localUser);
+          } else {
+            localStorage.removeItem('sweetcrumbs_token');
+            setUser(null);
+          }
         }
       }
       setLoading(false);
@@ -34,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const res = await api.post('/auth/login', { email, password });
-      if (res.data.success) {
+      if (res && res.data && res.data.success) {
         setUser(res.data.user);
         if (res.data.token) {
           localStorage.setItem('sweetcrumbs_token', res.data.token);
@@ -42,26 +50,44 @@ export const AuthProvider = ({ children }) => {
         showToast(`Welcome back, ${res.data.user.name}! 🍰`, 'success');
         return { success: true };
       }
+      throw new Error(res?.data?.message || 'Login failed');
     } catch (err) {
-      showToast(err.message, 'error');
-      return { success: false, message: err.message };
+      try {
+        const { user: logUser, token } = clientStore.login(email, password);
+        setUser(logUser);
+        if (token) localStorage.setItem('sweetcrumbs_token', token);
+        showToast(`Welcome back, ${logUser.name}! 🍰`, 'success');
+        return { success: true };
+      } catch (clientErr) {
+        showToast(clientErr.message, 'error');
+        return { success: false, message: clientErr.message };
+      }
     }
   };
 
   const register = async (userData) => {
     try {
       const res = await api.post('/auth/register', userData);
-      if (res.data.success) {
+      if (res && res.data && res.data.success) {
         setUser(res.data.user);
         if (res.data.token) {
           localStorage.setItem('sweetcrumbs_token', res.data.token);
         }
-        showToast('Welcome to Bhuvneshwari Cakes!', 'success');
+        showToast('Welcome to Bhuvneshwari Cakes! 🍰', 'success');
         return { success: true };
       }
+      throw new Error(res?.data?.message || 'Registration failed');
     } catch (err) {
-      showToast(err.message, 'error');
-      return { success: false, message: err.message };
+      try {
+        const { user: regUser, token } = clientStore.register(userData);
+        setUser(regUser);
+        if (token) localStorage.setItem('sweetcrumbs_token', token);
+        showToast('Welcome to Bhuvneshwari Cakes! 🍰', 'success');
+        return { success: true };
+      } catch (clientErr) {
+        showToast(clientErr.message, 'error');
+        return { success: false, message: clientErr.message };
+      }
     }
   };
 

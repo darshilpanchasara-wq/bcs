@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../api/axios';
+import { clientStore } from '../api/clientStore';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
@@ -37,7 +38,7 @@ const CakeDetails = () => {
       setLoading(true);
       try {
         const res = await api.get(`/cakes/${identifier}`);
-        if (res.data.success) {
+        if (res && res.data && res.data.success) {
           const cakeData = res.data.cake;
           setCake(cakeData);
           setRelatedCakes(res.data.relatedCakes || []);
@@ -60,10 +61,31 @@ const CakeDetails = () => {
 
           setIsEggless(cakeData.isEggless || false);
           setSelectedImageIndex(0);
+        } else {
+          throw new Error('Fallback to clientStore');
         }
       } catch (err) {
-        console.error('Failed to load cake details:', err.message);
-        showToast('Could not load cake details.', 'error');
+        console.warn('Using clientStore cake fallback:', err.message);
+        const fallback = clientStore.getCakeById(identifier);
+        if (fallback) {
+          setCake(fallback.cake);
+          setRelatedCakes(fallback.relatedCakes || []);
+          setReviews(fallback.reviews || []);
+          const defaultOpt =
+            fallback.cake.weightOptions?.find((w) => w.isDefault) ||
+            fallback.cake.weightOptions?.[0] || {
+              weight: '1.0 kg',
+              servings: '8-10 Slices',
+              price: fallback.cake.basePrice
+            };
+          setSelectedWeight(defaultOpt);
+          if (fallback.cake.flavors && fallback.cake.flavors.length > 0) {
+            setSelectedFlavor(fallback.cake.flavors[0]);
+          }
+          setIsEggless(fallback.cake.isEggless || false);
+        } else {
+          showToast('Could not load cake details.', 'error');
+        }
       } finally {
         setLoading(false);
       }

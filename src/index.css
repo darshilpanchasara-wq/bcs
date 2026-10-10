@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -12,10 +12,19 @@
     background-color: #fff8f1;
     color: #1e1b17;
     overflow-x: hidden;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
-  h1, h2, h3, h4 {
-    font-family: 'Playfair Display', serif;
+  /* Make all texts use the exact same clean typography */
+  *, button, input, select, textarea {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* Force all headings uppercase globally */
+  h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   }
 }
 

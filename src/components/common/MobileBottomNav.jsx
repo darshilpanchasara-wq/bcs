@@ -41,7 +41,7 @@ const MobileBottomNav = () => {
                     </span>
                   )}
                 </div>
-                <span className="text-[11px] font-semibold tracking-tight mt-0.5">
+                <span className="text-[10px] font-bold uppercase tracking-wider mt-0.5">
                   {item.label}
                 </span>
                 {isActive && (

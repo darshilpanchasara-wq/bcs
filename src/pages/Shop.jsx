@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import api from '../api/axios';
+import { clientStore } from '../api/clientStore';
 import CakeCard from '../components/cake/CakeCard';
 import { CatalogSkeleton } from '../components/common/LoadingSkeleton';
 
@@ -33,11 +34,14 @@ const Shop = () => {
     const fetchCategories = async () => {
       try {
         const res = await api.get('/categories');
-        if (res.data.success) {
+        if (res && res.data && res.data.success) {
           setCategories(res.data.categories || []);
+        } else {
+          setCategories(clientStore.getCategories());
         }
       } catch (err) {
-        console.error('Failed to load categories:', err.message);
+        console.warn('Using clientStore categories:', err.message);
+        setCategories(clientStore.getCategories());
       }
     };
     fetchCategories();
@@ -48,31 +52,40 @@ const Shop = () => {
     const fetchCakes = async () => {
       setLoading(true);
       setError(null);
+      const queryObj = {};
       try {
         const params = new URLSearchParams();
-        if (search) params.append('search', search);
-        if (selectedCategory && selectedCategory !== 'all') params.append('category', selectedCategory);
-        if (priceMax && Number(priceMax) < 4000) params.append('maxPrice', priceMax);
-        if (isEggless) params.append('isEggless', 'true');
-        if (isGlutenFree) params.append('isGlutenFree', 'true');
-        if (selectedFlavor) params.append('flavor', selectedFlavor);
-        if (selectedWeight) params.append('weight', selectedWeight);
-        if (sortBy) params.append('sort', sortBy);
-        params.append('page', currentPage);
-        params.append('limit', 12);
+        if (search) { params.append('search', search); queryObj.search = search; }
+        if (selectedCategory && selectedCategory !== 'all') { params.append('category', selectedCategory); queryObj.category = selectedCategory; }
+        if (priceMax && Number(priceMax) < 4000) { params.append('maxPrice', priceMax); queryObj.maxPrice = priceMax; }
+        if (isEggless) { params.append('isEggless', 'true'); queryObj.isEggless = 'true'; }
+        if (isGlutenFree) { params.append('isGlutenFree', 'true'); queryObj.isGlutenFree = 'true'; }
+        if (selectedFlavor) { params.append('flavor', selectedFlavor); queryObj.flavor = selectedFlavor; }
+        if (selectedWeight) { params.append('weight', selectedWeight); queryObj.weight = selectedWeight; }
+        if (sortBy) { params.append('sort', sortBy); queryObj.sort = sortBy; }
+        params.append('page', currentPage); queryObj.page = currentPage;
+        params.append('limit', 12); queryObj.limit = 12;
 
         // Update URL query params
         setSearchParams(params, { replace: true });
 
         const res = await api.get(`/cakes?${params.toString()}`);
-        if (res.data.success) {
+        if (res && res.data && res.data.success && res.data.cakes?.length > 0) {
           setCakes(res.data.cakes || []);
           setTotalCakes(res.data.totalCakes || 0);
           setPages(res.data.pages || 1);
+        } else {
+          const fallback = clientStore.getCakes(queryObj);
+          setCakes(fallback.cakes);
+          setTotalCakes(fallback.totalCakes);
+          setPages(fallback.pages);
         }
       } catch (err) {
-        console.error('Failed to fetch cakes:', err.message);
-        setError('Unable to load cakes. Please verify that the backend API server is running on port 5000.');
+        console.warn('Using clientStore cakes fallback:', err.message);
+        const fallback = clientStore.getCakes(queryObj);
+        setCakes(fallback.cakes);
+        setTotalCakes(fallback.totalCakes);
+        setPages(fallback.pages);
       } finally {
         setLoading(false);
       }
@@ -130,7 +143,7 @@ const Shop = () => {
           </span>
         </div>
         <p className="font-body text-xs sm:text-sm text-secondary">
-          100% Pure vegetarian & eggless celebration cakes, royal engagement tiers, sugar paste couture, and savory snacks by Darshil Panchasara.
+          100% Pure vegetarian & eggless celebration cakes, handcrafted designer bakes, and savory snacks by Darshil Panchasara.
         </p>
       </div>
 

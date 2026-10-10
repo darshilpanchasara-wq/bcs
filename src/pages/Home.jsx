@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
+import { clientStore } from '../api/clientStore';
 import CakeCard from '../components/cake/CakeCard';
 import { CakeCardSkeleton } from '../components/common/LoadingSkeleton';
 import { useToast } from '../context/ToastContext';
@@ -22,16 +23,26 @@ const Home = () => {
           api.get('/categories')
         ]);
 
-        if (featuredRes.data.success) {
+        if (featuredRes && featuredRes.data && featuredRes.data.success && featuredRes.data.featured?.length > 0) {
           setFeaturedCakes(featuredRes.data.featured || []);
           setBestsellers(featuredRes.data.bestsellers || []);
+        } else {
+          const fallback = clientStore.getFeaturedCakes();
+          setFeaturedCakes(fallback.featured);
+          setBestsellers(fallback.bestsellers);
         }
 
-        if (categoriesRes.data.success) {
+        if (categoriesRes && categoriesRes.data && categoriesRes.data.success && categoriesRes.data.categories?.length > 0) {
           setCategories(categoriesRes.data.categories || []);
+        } else {
+          setCategories(clientStore.getCategories());
         }
       } catch (err) {
-        console.error('Home page data error:', err.message);
+        console.warn('Home page data fallback to clientStore:', err.message);
+        const fallback = clientStore.getFeaturedCakes();
+        setFeaturedCakes(fallback.featured);
+        setBestsellers(fallback.bestsellers);
+        setCategories(clientStore.getCategories());
       } finally {
         setLoading(false);
       }
@@ -280,7 +291,7 @@ const Home = () => {
               Flat 15% Off Your Pure Veg Celebration Cake
             </h3>
             <p className="font-body text-sm text-neutral-100 max-w-md">
-              Valid on all Engagement, Sugar Paste, Rasmalai, and designer truffle cakes.
+              Valid on all Theme, Rasmalai, Cheesecakes, and designer truffle celebration cakes.
             </p>
           </div>
 
@@ -452,7 +463,7 @@ const Home = () => {
                 ))}
               </div>
               <p className="font-body text-sm text-secondary italic leading-relaxed">
-                "We ordered the 3-Tier Royal Engagement Cake from Bhuvneshwari Cakes for my sister's ring ceremony. The sugar florals and gold foil details were breathtaking. Everyone praised the Rasmalai sponge!"
+                "We ordered the 3-Tier Royal Celebration Cake from Bhuvneshwari Cakes for my sister's celebration. The edible florals and gold foil details were breathtaking. Everyone praised the Rasmalai sponge!"
               </p>
             </div>
             <div className="flex items-center gap-3 pt-2 border-t border-surface-container-high">
@@ -498,7 +509,7 @@ const Home = () => {
                 ))}
               </div>
               <p className="font-body text-sm text-secondary italic leading-relaxed">
-                "Our wedding sugar paste tier arrived in a refrigerated van in flawless condition. The cascading sugar roses looked real! Thank you Darshil and Shree Bhuvneshwari Cake & Snacks for making our day magical."
+                "Our celebration cake tier arrived in a refrigerated van in flawless condition. The cascading roses looked real! Thank you Darshil and Shree Bhuvneshwari Cake & Snacks for making our day magical."
               </p>
             </div>
             <div className="flex items-center gap-3 pt-2 border-t border-surface-container-high">
