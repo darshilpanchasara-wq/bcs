@@ -156,13 +156,22 @@ const Contact = () => {
               ></textarea>
             </div>
 
-            <button
-              type="submit"
-              className="mt-2 w-full h-12 rounded-full bg-primary hover:bg-primary-container text-on-primary font-bold text-sm shadow-md active:scale-95 transition-all flex items-center justify-center gap-2"
-            >
-              <span>Submit Inquiry to Darshil Panchasara</span>
-              <span className="material-symbols-outlined text-[18px]">send</span>
-            </button>
+            <div className="flex flex-col sm:flex-row gap-2 mt-2">
+              <button
+                type="submit"
+                className="flex-1 h-12 rounded-full bg-primary hover:bg-primary-container text-on-primary font-bold text-sm shadow-md active:scale-95 transition-all flex items-center justify-center gap-2"
+              >
+                <span>Submit Inquiry to Darshil Panchasara</span>
+                <span className="material-symbols-outlined text-[18px]">send</span>
+              </button>
+              <a
+                href="tel:8866265927"
+                className="h-12 px-6 rounded-full border-2 border-primary text-primary hover:bg-primary/10 font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-sm"
+              >
+                <span className="material-symbols-outlined text-[18px]">call</span>
+                <span>Call 8866265927</span>
+              </a>
+            </div>
           </form>
         </div>
 
@@ -181,14 +190,41 @@ const Contact = () => {
 
             <div className="flex flex-col gap-3.5 text-xs sm:text-sm text-secondary">
               <div className="flex items-start gap-3">
-                <span className="material-symbols-outlined text-[22px] text-primary flex-shrink-0 mt-0.5">
-                  location_on
-                </span>
-                <div>
-                  <p className="font-bold text-on-surface">Dhrol Storefront & Bakery</p>
+                <a
+                  href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Open in Google Maps"
+                  className="w-10 h-10 rounded-2xl bg-primary/10 hover:bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 transition-transform hover:scale-110 shadow-sm mt-0.5"
+                >
+                  <span className="material-symbols-outlined text-[24px]">location_on</span>
+                </a>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <p className="font-bold text-on-surface">Dhrol Storefront & Bakery</p>
+                    <a
+                      href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-bold text-primary hover:underline inline-flex items-center gap-0.5"
+                    >
+                      <span>Google Maps</span>
+                      <span className="material-symbols-outlined text-[13px]">open_in_new</span>
+                    </a>
+                  </div>
                   <p>PP Complex, Near Sak Market</p>
                   <p>Jamnagar Road, Dhrol</p>
                   <p>Jamnagar, Gujarat - 361210</p>
+                  <a
+                    href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mt-2 px-3.5 py-1.5 rounded-full bg-primary text-white text-xs font-bold hover:bg-primary-container transition-all shadow-sm"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">location_on</span>
+                    <span>Get Directions on Google Maps</span>
+                    <span className="material-symbols-outlined text-[13px]">open_in_new</span>
+                  </a>
                 </div>
               </div>
 
@@ -202,15 +238,35 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-[22px] text-primary flex-shrink-0">
-                  call
-                </span>
-                <div>
+              <div className="flex items-start gap-3">
+                <a
+                  href="tel:8866265927"
+                  title="Call 8866265927"
+                  className="w-10 h-10 rounded-2xl bg-primary/10 hover:bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 transition-transform hover:scale-110 shadow-sm mt-0.5"
+                >
+                  <span className="material-symbols-outlined text-[24px]">call</span>
+                </a>
+                <div className="flex-1">
                   <p className="font-bold text-on-surface">Direct Phone & WhatsApp</p>
-                  <p className="text-primary font-semibold">94272 43732 / 88662 65927 / 9313581083</p>
-                  <p className="text-xs text-secondary mt-0.5">
-                    WhatsApp Chat: <a href="https://wa.me/919313581083" target="_blank" rel="noopener noreferrer" className="text-primary font-bold hover:underline">+91 9313581083</a>
+                  <div className="flex flex-wrap items-center gap-2 mt-1">
+                    <a
+                      href="tel:8866265927"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary text-white text-xs font-bold hover:bg-primary-container transition-all shadow-sm"
+                    >
+                      <span className="material-symbols-outlined text-[14px]">call</span>
+                      <span>Call: 88662 65927</span>
+                    </a>
+                    <a
+                      href="https://wa.me/918866265927?text=Hello%20Shree%20Bhuvneshwari%20Cakes,%20I%20would%20like%20to%20order%20a%20cake."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#25D366] text-white text-xs font-bold hover:bg-[#1ebd5a] transition-all shadow-sm"
+                    >
+                      <span>WhatsApp: 8866265927</span>
+                    </a>
+                  </div>
+                  <p className="text-xs text-secondary mt-1.5">
+                    Other numbers: <a href="tel:9427243732" className="hover:underline">94272 43732</a> • <a href="tel:9313581083" className="hover:underline">9313581083</a>
                   </p>
                 </div>
               </div>
@@ -248,6 +304,16 @@ const Contact = () => {
               <p className="text-xs text-neutral-300">
                 Near Sak Market, Jamnagar Road, Dhrol • Fresh bakes every morning & evening
               </p>
+              <a
+                href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md text-white text-xs font-bold w-fit transition-all"
+              >
+                <span className="material-symbols-outlined text-[15px]">location_on</span>
+                <span>Open in Google Maps</span>
+                <span className="material-symbols-outlined text-[13px]">open_in_new</span>
+              </a>
             </div>
           </div>
         </div>

@@ -59,35 +59,75 @@ const ShopDetails = () => {
           </div>
 
           <div className="p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/60 shadow-sm">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="material-symbols-outlined text-primary text-2xl">location_on</span>
-              <h3 className="font-headline text-lg font-bold text-on-surface">Store Location</h3>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="View on Google Maps"
+                  className="w-10 h-10 rounded-2xl bg-primary/10 hover:bg-primary/20 text-primary flex items-center justify-center transition-transform hover:scale-110 shadow-sm"
+                >
+                  <span className="material-symbols-outlined text-primary text-2xl">location_on</span>
+                </a>
+                <h3 className="font-headline text-lg font-bold text-on-surface">Store Location</h3>
+              </div>
+              <a
+                href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-primary hover:underline inline-flex items-center gap-0.5"
+              >
+                <span>Google Maps</span>
+                <span className="material-symbols-outlined text-[13px]">open_in_new</span>
+              </a>
             </div>
             <p className="text-sm text-on-surface font-medium">
               PP Complex, Near Sak Market, Jamnagar Road, Dhrol, Jamnagar - 361210
             </p>
             <p className="text-xs text-secondary mt-1">Landmark: Near Sak Market, Jamnagar Road</p>
+            <a
+              href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 mt-2 px-3.5 py-1.5 rounded-full bg-primary text-white text-xs font-bold hover:bg-primary-container transition-all shadow-sm"
+            >
+              <span className="material-symbols-outlined text-[16px]">location_on</span>
+              <span>Open in Google Maps</span>
+              <span className="material-symbols-outlined text-[13px]">open_in_new</span>
+            </a>
           </div>
 
           <div className="p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/60 shadow-sm">
             <div className="flex items-center gap-3 mb-2">
-              <span className="material-symbols-outlined text-primary text-2xl">call</span>
+              <a
+                href="tel:8866265927"
+                title="Call 8866265927"
+                className="w-10 h-10 rounded-2xl bg-primary/10 hover:bg-primary/20 text-primary flex items-center justify-center transition-transform hover:scale-110 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-primary text-2xl">call</span>
+              </a>
               <h3 className="font-headline text-lg font-bold text-on-surface">Direct Orders & Inquiries</h3>
             </div>
-            <p className="text-sm font-semibold text-primary">
-              Hotline: 94272 43732 / 88662 65927 / 9313581083
-            </p>
-            <p className="text-xs text-secondary mt-1">
-              WhatsApp for custom cake consultation & fast orders:{' '}
+            <div className="flex flex-wrap items-center gap-2 my-1.5">
               <a
-                href="https://wa.me/919313581083?text=Hello%20Shree%20Bhuvneshwari%20Cakes,%20I%20would%20like%20to%20order%20a%20cake."
+                href="tel:8866265927"
+                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-primary text-white text-xs font-bold hover:bg-primary-container transition-all shadow-sm"
+              >
+                <span className="material-symbols-outlined text-[14px]">call</span>
+                <span>Call: 88662 65927</span>
+              </a>
+              <a
+                href="https://wa.me/918866265927?text=Hello%20Shree%20Bhuvneshwari%20Cakes,%20I%20would%20like%20to%20order%20a%20cake."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-primary hover:underline inline-flex items-center gap-1"
+                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-[#25D366] text-white text-xs font-bold hover:bg-[#1ebd5a] transition-all shadow-sm"
               >
-                <span>+91 9313581083</span>
-                <span className="material-symbols-outlined text-[14px]">open_in_new</span>
+                <span>WhatsApp (8866265927)</span>
               </a>
+            </div>
+            <p className="text-xs text-secondary mt-1">
+              Alternate hotlines: <a href="tel:9427243732" className="hover:underline">94272 43732</a> • <a href="tel:9313581083" className="hover:underline">9313581083</a>
             </p>
           </div>
         </div>
@@ -255,8 +295,17 @@ const ShopDetails = () => {
             to="/contact"
             className="px-8 py-3.5 rounded-full bg-neutral-900/60 text-white border border-white/20 font-bold text-sm hover:bg-neutral-900 transition-colors"
           >
-            Contact & Directions
+            Contact & Hotline
           </Link>
+          <a
+            href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3.5 rounded-full bg-white/20 text-white border border-white/40 font-bold text-sm hover:bg-white/30 transition-colors inline-flex items-center gap-1.5 backdrop-blur-md"
+          >
+            <span className="material-symbols-outlined text-[18px]">location_on</span>
+            <span>Google Maps</span>
+          </a>
         </div>
       </div>
     </div>

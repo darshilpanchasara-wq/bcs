@@ -396,12 +396,16 @@ const Home = () => {
                 <span>View Full Shop Details & Snacks</span>
                 <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
               </Link>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-surface-container-lowest text-on-surface font-semibold text-sm border border-outline-variant/60 hover:bg-white transition-all"
+              <a
+                href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-surface-container-lowest text-on-surface font-semibold text-sm border border-outline-variant/60 hover:bg-white hover:text-primary transition-all shadow-sm"
               >
-                <span>Store Location & Directions</span>
-              </Link>
+                <span className="material-symbols-outlined text-primary text-[18px]">location_on</span>
+                <span>Store Location & Directions (Map)</span>
+                <span className="material-symbols-outlined text-[13px] text-secondary">open_in_new</span>
+              </a>
             </div>
           </div>
 

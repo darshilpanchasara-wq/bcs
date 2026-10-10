@@ -35,7 +35,7 @@ const WhatsAppChatbot = () => {
     {
       icon: '📍',
       label: 'Store Location & Hours',
-      prompt: 'Hi! Could you share directions to PP Complex, Dhrol and your store opening hours?'
+      prompt: 'Hi! Could you share directions to PP Complex, Dhrol? (Google Maps: https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8)'
     },
     {
       icon: '🚚',
@@ -224,9 +224,9 @@ const WhatsAppChatbot = () => {
               Hotlines:
             </span>
             <div className="flex items-center gap-2 font-mono font-bold text-primary">
-              <a href="tel:9427243732" className="hover:underline">94272 43732</a>
+              <a href="tel:8866265927" className="hover:underline font-bold">88662 65927</a>
               <span>•</span>
-              <a href="tel:8866265927" className="hover:underline">88662 65927</a>
+              <a href="tel:9427243732" className="hover:underline">94272 43732</a>
             </div>
           </div>
 

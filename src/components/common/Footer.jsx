@@ -87,15 +87,34 @@ const Footer = () => {
               Dhrol & Jamnagar’s premier confectionery specializing in pure vegetarian couture celebration cakes, unique interactive smash cakes, and hot savory bakery snacks. Founded by <strong className="text-on-surface">Darshil Panchasara</strong>.
             </p>
             <div className="flex items-center gap-3 pt-2 text-secondary">
-              <span className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:text-primary transition-colors cursor-pointer">
+              <span className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:text-primary transition-colors cursor-pointer" title="Bakery Gallery">
                 <span className="material-symbols-outlined text-[18px]">photo_camera</span>
               </span>
-              <span className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:text-primary transition-colors cursor-pointer">
-                <span className="material-symbols-outlined text-[18px]">public</span>
-              </span>
-              <span className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:text-primary transition-colors cursor-pointer">
+              <a
+                href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="View Store Location on Google Maps"
+                className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"
+              >
+                <span className="material-symbols-outlined text-[18px]">location_on</span>
+              </a>
+              <a
+                href="tel:8866265927"
+                title="Call 8866265927"
+                className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"
+              >
                 <span className="material-symbols-outlined text-[18px]">call</span>
-              </span>
+              </a>
+              <a
+                href="https://wa.me/918866265927"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Chat on WhatsApp (8866265927)"
+                className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-[#25D366] hover:text-white transition-all shadow-sm"
+              >
+                <span className="material-symbols-outlined text-[18px]">chat</span>
+              </a>
             </div>
           </div>
 
@@ -153,12 +172,25 @@ const Footer = () => {
                 <span>Open Daily: 7:00 AM – 10:30 PM</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-[16px] text-primary">pin_drop</span>
-                <span>PP Complex, Near Sak Market, Jamnagar Road, Dhrol - 361210</span>
+                <a
+                  href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 hover:text-primary transition-colors text-xs text-secondary"
+                  title="Open in Google Maps"
+                >
+                  <span className="material-symbols-outlined text-[16px] text-primary">pin_drop</span>
+                  <span>PP Complex, Near Sak Market, Jamnagar Road, Dhrol - 361210</span>
+                  <span className="material-symbols-outlined text-[12px] text-primary">open_in_new</span>
+                </a>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 text-xs text-secondary">
                 <span className="material-symbols-outlined text-[16px] text-primary">call</span>
-                <span>94272 43732 / 88662 65927 / 9313581083</span>
+                <a href="tel:8866265927" className="font-bold text-on-surface hover:text-primary">88662 65927</a>
+                <span>/</span>
+                <a href="tel:9427243732" className="hover:text-primary">94272 43732</a>
+                <span>/</span>
+                <a href="tel:9313581083" className="hover:text-primary">9313581083</a>
               </div>
             </div>
           </div>
