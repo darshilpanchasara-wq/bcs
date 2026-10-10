@@ -706,7 +706,14 @@ let cakes = rawCakes.map((c, i) => {
       { weight: '2.0 kg', servings: '16-20 Slices', price: Math.round(basePrice * 1.9), isDefault: false }
     ],
     description: c.description,
-    ingredients: '100% Pure Vegetarian Eggless Sponge, Callebaut Cocoa, Real Dairy Cream, Pure Saffron, Fine Pistachio & Almond slivers, Natural Fruit Compote.',
+    ingredients: [
+      '100% Pure Vegetarian Eggless Sponge',
+      'Callebaut Cocoa',
+      'Real Dairy Cream',
+      'Pure Saffron',
+      'Fine Pistachio & Almond slivers',
+      'Natural Fruit Compote'
+    ],
     shelfLife: '3-4 Days (Refrigerate below 5°C)',
     storageInstructions: 'Store in airtight box inside the refrigerator. Keep away from direct sunlight.'
   };
@@ -1020,6 +1027,13 @@ app.get('/api/cakes/:identifier', (req, res) => {
     return res.status(404).json({ success: false, message: 'Cake not found' });
   }
 
+  // Ensure ingredients is an array
+  if (cake && !Array.isArray(cake.ingredients)) {
+    cake.ingredients = typeof cake.ingredients === 'string'
+      ? cake.ingredients.split(',').map((s) => s.trim()).filter(Boolean)
+      : ['100% Pure Vegetarian Eggless Sponge', 'Callebaut Cocoa', 'Real Dairy Cream', 'Pure Saffron', 'Fine Pistachio & Almond slivers', 'Natural Fruit Compote'];
+  }
+
   const relatedCakes = cakes
     .filter((c) => c._id !== cake._id && c.categorySlug === cake.categorySlug)
     .slice(0, 4);
@@ -1058,7 +1072,11 @@ app.post('/api/cakes', (req, res) => {
       { weight: '1.0 kg', servings: '8-10 Slices', price: Number(payload.basePrice) || 599, isDefault: true }
     ],
     description: payload.description || 'Freshly baked artisanal specialty.',
-    ingredients: payload.ingredients || 'Flour, Dairy butter, cocoa, sugar.',
+    ingredients: Array.isArray(payload.ingredients)
+      ? payload.ingredients
+      : (typeof payload.ingredients === 'string'
+          ? payload.ingredients.split(',').map((s) => s.trim()).filter(Boolean)
+          : ['100% Pure Vegetarian Eggless Sponge', 'Callebaut Cocoa', 'Real Dairy Cream']),
     shelfLife: '3-4 Days refrigerated',
     storageInstructions: 'Refrigerate below 5°C.'
   };
@@ -1072,7 +1090,16 @@ app.put('/api/cakes/:id', (req, res) => {
   const idx = cakes.findIndex((c) => c._id === req.params.id);
   if (idx === -1) return res.status(404).json({ success: false, message: 'Cake not found' });
 
-  cakes[idx] = { ...cakes[idx], ...req.body };
+  const updatedBody = { ...req.body };
+  if (updatedBody.ingredients) {
+    updatedBody.ingredients = Array.isArray(updatedBody.ingredients)
+      ? updatedBody.ingredients
+      : (typeof updatedBody.ingredients === 'string'
+          ? updatedBody.ingredients.split(',').map((s) => s.trim()).filter(Boolean)
+          : []);
+  }
+
+  cakes[idx] = { ...cakes[idx], ...updatedBody };
   res.json({ success: true, cake: cakes[idx] });
 });
 

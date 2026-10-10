@@ -8,6 +8,12 @@ import { useToast } from '../context/ToastContext';
 import RatingStars from '../components/common/RatingStars';
 import CakeCard from '../components/cake/CakeCard';
 
+const toArray = (v) => {
+  if (Array.isArray(v)) return v;
+  if (typeof v === 'string') return v.split(',').map((s) => s.trim()).filter(Boolean);
+  return [];
+};
+
 const CakeDetails = () => {
   const { identifier } = useParams();
   const { addToCart } = useCart();
@@ -116,14 +122,22 @@ const CakeDetails = () => {
     );
   }
 
-  const currentPrice = selectedWeight ? selectedWeight.price : cake.basePrice;
+  const currentPrice = selectedWeight ? selectedWeight.price : (cake.basePrice || 0);
   const isFavorited = isInWishlist(cake._id);
+
+  // Safe normalizers for arrays
+  const ingredients = toArray(cake?.ingredients);
+  const images = toArray(cake?.images);
+  const flavors = toArray(cake?.flavors);
+  const weightOptions = Array.isArray(cake?.weightOptions) ? cake.weightOptions : [];
+  const safeReviews = Array.isArray(reviews) ? reviews : [];
+  const safeRelatedCakes = Array.isArray(relatedCakes) ? relatedCakes : [];
 
   const handleAddToCart = () => {
     addToCart({
       cakeId: cake._id,
       name: cake.name,
-      image: cake.images?.[0] || '/assets/strawberry-cake.png',
+      image: images[0] || '/assets/strawberry-cake.png',
       weight: selectedWeight ? selectedWeight.weight : '1.0 kg',
       price: currentPrice,
       flavor: selectedFlavor,
@@ -169,7 +183,7 @@ const CakeDetails = () => {
     }
   };
 
-  const activeImage = cake.images?.[selectedImageIndex] || cake.images?.[0] || '/assets/strawberry-cake.png';
+  const activeImage = images[selectedImageIndex] || images[0] || '/assets/strawberry-cake.png';
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24">
@@ -238,9 +252,9 @@ const CakeDetails = () => {
           </div>
 
           {/* Thumbnails Row */}
-          {cake.images && cake.images.length > 1 && (
+          {images.length > 1 && (
             <div className="flex gap-3 overflow-x-auto no-scrollbar py-1">
-              {cake.images.map((img, idx) => (
+              {images.map((img, idx) => (
                 <button
                   key={idx}
                   onClick={() => setSelectedImageIndex(idx)}
@@ -262,16 +276,13 @@ const CakeDetails = () => {
             <p className="font-body text-sm text-secondary leading-relaxed">{cake.description}</p>
 
             {/* Ingredients */}
-            {((Array.isArray(cake.ingredients) && cake.ingredients.length > 0) || (typeof cake.ingredients === 'string' && cake.ingredients.trim().length > 0)) && (
+            {ingredients.length > 0 && (
               <div className="pt-2 border-t border-surface-container-high/60">
                 <span className="font-body text-xs font-bold uppercase tracking-wider text-secondary">
                   Key Ingredients & Craft
                 </span>
                 <div className="flex flex-wrap gap-1.5 mt-2">
-                  {(Array.isArray(cake.ingredients)
-                    ? cake.ingredients
-                    : cake.ingredients.split(',').map((s) => s.trim()).filter(Boolean)
-                  ).map((ing, i) => (
+                  {ingredients.map((ing, i) => (
                     <span
                       key={i}
                       className="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface text-xs font-medium border border-outline-variant/40"
@@ -333,7 +344,7 @@ const CakeDetails = () => {
           </div>
 
           {/* Size / Weight Selector */}
-          {cake.weightOptions && Array.isArray(cake.weightOptions) && cake.weightOptions.length > 0 && (
+          {weightOptions.length > 0 && (
             <div className="flex flex-col gap-2.5">
               <div className="flex items-center justify-between">
                 <label className="font-body text-xs font-bold uppercase tracking-wider text-secondary">
@@ -344,7 +355,7 @@ const CakeDetails = () => {
                 </span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {cake.weightOptions.map((opt, i) => {
+                {weightOptions.map((opt, i) => {
                   const isSelected = selectedWeight?.weight === opt.weight;
                   return (
                     <button
@@ -372,7 +383,7 @@ const CakeDetails = () => {
           )}
 
           {/* Flavor Selection */}
-          {cake.flavors && Array.isArray(cake.flavors) && cake.flavors.length > 0 && (
+          {flavors.length > 0 && (
             <div className="flex flex-col gap-2">
               <label className="font-body text-xs font-bold uppercase tracking-wider text-secondary">
                 Flavor & Sponge Profile
@@ -383,7 +394,7 @@ const CakeDetails = () => {
                   onChange={(e) => setSelectedFlavor(e.target.value)}
                   className="w-full h-12 pl-4 pr-10 rounded-2xl bg-surface-container-low text-on-surface text-xs sm:text-sm font-medium appearance-none outline-none focus:ring-2 focus:ring-primary/20 border border-outline-variant/40"
                 >
-                  {cake.flavors.map((flv, idx) => (
+                  {flavors.map((flv, idx) => (
                     <option key={idx} value={flv}>
                       {flv}
                     </option>
@@ -516,16 +527,16 @@ const CakeDetails = () => {
           <div className="lg:col-span-7 flex flex-col gap-6">
             <div className="flex items-baseline justify-between">
               <h2 className="font-headline text-2xl font-bold text-on-surface">
-                Customer Reviews ({reviews.length})
+                Customer Reviews ({safeReviews.length})
               </h2>
               <RatingStars rating={cake.rating} showNum={true} size="16px" />
             </div>
 
-            {(!Array.isArray(reviews) || reviews.length === 0) ? (
+            {safeReviews.length === 0 ? (
               <p className="text-sm text-secondary italic">Be the first to review this artisanal cake!</p>
             ) : (
               <div className="flex flex-col gap-4">
-                {(Array.isArray(reviews) ? reviews : []).map((rev) => (
+                {safeReviews.map((rev) => (
                   <div
                     key={rev._id}
                     className="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/60 shadow-sm flex flex-col gap-2"
@@ -610,13 +621,13 @@ const CakeDetails = () => {
       </section>
 
       {/* Related Cakes Section */}
-      {relatedCakes && Array.isArray(relatedCakes) && relatedCakes.length > 0 && (
+      {safeRelatedCakes.length > 0 && (
         <section className="mt-16 pt-12 border-t border-surface-container-high">
           <h2 className="font-headline text-2xl font-bold text-on-surface mb-6">
             You May Also Adore
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {relatedCakes.map((related) => (
+            {safeRelatedCakes.map((related) => (
               <CakeCard key={related._id} cake={related} />
             ))}
           </div>

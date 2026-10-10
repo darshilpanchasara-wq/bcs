@@ -87,9 +87,9 @@ const AdminCakes = () => {
       isFeatured: cake.isFeatured,
       stock: cake.stock || 20,
       preparationTime: cake.preparationTime || '4 - 6 hours',
-      flavors: cake.flavors?.join(', ') || '',
-      ingredients: cake.ingredients?.join(', ') || '',
-      images: cake.images?.join(', ') || '',
+      flavors: Array.isArray(cake.flavors) ? cake.flavors.join(', ') : (cake.flavors || ''),
+      ingredients: Array.isArray(cake.ingredients) ? cake.ingredients.join(', ') : (cake.ingredients || ''),
+      images: Array.isArray(cake.images) ? cake.images.join(', ') : (cake.images || ''),
       weightOptions: cake.weightOptions || initialForm.weightOptions
     });
     setIsModalOpen(true);

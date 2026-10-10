@@ -856,6 +856,31 @@ function setStorage(key, data) {
   }
 }
 
+export function ensureValidCake(c) {
+  if (!c) return c;
+  if (!Array.isArray(c.ingredients)) {
+    c.ingredients = typeof c.ingredients === 'string'
+      ? c.ingredients.split(',').map((s) => s.trim()).filter(Boolean)
+      : ['100% Pure Vegetarian Eggless Sponge', 'Callebaut Cocoa', 'Real Dairy Cream', 'Pure Saffron', 'Pistachio & Almond Slivers', 'Natural Fruit Compote'];
+  }
+  if (!Array.isArray(c.images)) {
+    c.images = typeof c.images === 'string' ? [c.images] : (c.image ? [c.image] : ['/assets/catalog/boss-baby.jpg']);
+  }
+  if (!Array.isArray(c.flavors)) {
+    c.flavors = typeof c.flavors === 'string' ? c.flavors.split(',').map((s) => s.trim()).filter(Boolean) : [];
+  }
+  if (!Array.isArray(c.weightOptions)) {
+    const basePrice = c.basePrice || 1000;
+    c.weightOptions = [
+      { weight: '0.5 kg', servings: '4-6 Slices', price: Math.round(basePrice * 0.7), isDefault: false },
+      { weight: '1.0 kg', servings: '8-10 Slices', price: basePrice, isDefault: true },
+      { weight: '1.5 kg', servings: '12-14 Slices', price: Math.round(basePrice * 1.45), isDefault: false },
+      { weight: '2.0 kg', servings: '16-20 Slices', price: Math.round(basePrice * 1.9), isDefault: false }
+    ];
+  }
+  return c;
+}
+
 // Client Store Operations
 export const clientStore = {
   getCategories() {
@@ -863,7 +888,8 @@ export const clientStore = {
   },
 
   getCakes(params = {}) {
-    const cakes = getStorage('sweetcrumbs_cakes', INITIAL_CAKES);
+    const rawCakes = getStorage('sweetcrumbs_cakes', INITIAL_CAKES);
+    const cakes = rawCakes.map(ensureValidCake);
     let results = [...cakes];
 
     if (params.search) {
@@ -933,7 +959,8 @@ export const clientStore = {
   },
 
   getFeaturedCakes() {
-    const cakes = getStorage('sweetcrumbs_cakes', INITIAL_CAKES);
+    const rawCakes = getStorage('sweetcrumbs_cakes', INITIAL_CAKES);
+    const cakes = rawCakes.map(ensureValidCake);
     const featured = cakes.filter((c) => c.isFeatured);
     const bestsellers = cakes.filter((c) => c.isBestseller);
     return {
@@ -943,7 +970,8 @@ export const clientStore = {
   },
 
   getCakeById(idOrSlug) {
-    const cakes = getStorage('sweetcrumbs_cakes', INITIAL_CAKES);
+    const rawCakes = getStorage('sweetcrumbs_cakes', INITIAL_CAKES);
+    const cakes = rawCakes.map(ensureValidCake);
     const reviews = getStorage('sweetcrumbs_reviews', INITIAL_REVIEWS);
     const cake = cakes.find((c) => c._id === idOrSlug || c.slug === idOrSlug);
     if (!cake) return null;

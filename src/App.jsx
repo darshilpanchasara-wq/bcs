@@ -11,6 +11,7 @@ import Footer from './components/common/Footer';
 import WhatsAppChatbot from './components/common/WhatsAppChatbot';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import ScrollToTop from './components/common/ScrollToTop';
+import ErrorBoundary from './components/common/ErrorBoundary';
 
 // Public Pages
 import Home from './pages/Home';
@@ -53,7 +54,14 @@ const AppLayout = () => {
           {/* Public Storefront Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/cakes/:identifier" element={<CakeDetails />} />
+          <Route
+            path="/cakes/:identifier"
+            element={
+              <ErrorBoundary fallbackMessage="Something went wrong loading this cake. Please explore our other delicious selections.">
+                <CakeDetails />
+              </ErrorBoundary>
+            }
+          />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation/:id" element={<OrderConfirmation />} />
