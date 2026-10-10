@@ -690,7 +690,7 @@ export const INITIAL_CAKES = RAW_CAKES.map((c, i) => {
       { weight: '2.0 kg', servings: '16-20 Slices', price: Math.round(basePrice * 1.9), isDefault: false }
     ],
     description: c.description,
-    ingredients: '100% Pure Vegetarian Eggless Sponge, Callebaut Cocoa, Real Dairy Cream, Pure Saffron, Fine Pistachio & Almond slivers, Natural Fruit Compote.',
+    ingredients: ['100% Pure Vegetarian Eggless Sponge', 'Callebaut Cocoa', 'Real Dairy Cream', 'Pure Saffron', 'Pistachio & Almond Slivers', 'Natural Fruit Compote'],
     shelfLife: '3-4 Days (Refrigerate below 5°C)',
     storageInstructions: 'Store in airtight box inside the refrigerator. Keep away from direct sunlight.'
   };

@@ -261,13 +261,17 @@ const CakeDetails = () => {
             <h3 className="font-headline text-xl font-bold text-on-surface">The Confectionery Story</h3>
             <p className="font-body text-sm text-secondary leading-relaxed">{cake.description}</p>
 
-            {cake.ingredients && cake.ingredients.length > 0 && (
+            {/* Ingredients */}
+            {((Array.isArray(cake.ingredients) && cake.ingredients.length > 0) || (typeof cake.ingredients === 'string' && cake.ingredients.trim().length > 0)) && (
               <div className="pt-2 border-t border-surface-container-high/60">
                 <span className="font-body text-xs font-bold uppercase tracking-wider text-secondary">
                   Key Ingredients & Craft
                 </span>
                 <div className="flex flex-wrap gap-1.5 mt-2">
-                  {cake.ingredients.map((ing, i) => (
+                  {(Array.isArray(cake.ingredients)
+                    ? cake.ingredients
+                    : cake.ingredients.split(',').map((s) => s.trim()).filter(Boolean)
+                  ).map((ing, i) => (
                     <span
                       key={i}
                       className="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface text-xs font-medium border border-outline-variant/40"
@@ -329,7 +333,7 @@ const CakeDetails = () => {
           </div>
 
           {/* Size / Weight Selector */}
-          {cake.weightOptions && cake.weightOptions.length > 0 && (
+          {cake.weightOptions && Array.isArray(cake.weightOptions) && cake.weightOptions.length > 0 && (
             <div className="flex flex-col gap-2.5">
               <div className="flex items-center justify-between">
                 <label className="font-body text-xs font-bold uppercase tracking-wider text-secondary">
@@ -368,7 +372,7 @@ const CakeDetails = () => {
           )}
 
           {/* Flavor Selection */}
-          {cake.flavors && cake.flavors.length > 0 && (
+          {cake.flavors && Array.isArray(cake.flavors) && cake.flavors.length > 0 && (
             <div className="flex flex-col gap-2">
               <label className="font-body text-xs font-bold uppercase tracking-wider text-secondary">
                 Flavor & Sponge Profile
@@ -517,11 +521,11 @@ const CakeDetails = () => {
               <RatingStars rating={cake.rating} showNum={true} size="16px" />
             </div>
 
-            {reviews.length === 0 ? (
+            {(!Array.isArray(reviews) || reviews.length === 0) ? (
               <p className="text-sm text-secondary italic">Be the first to review this artisanal cake!</p>
             ) : (
               <div className="flex flex-col gap-4">
-                {reviews.map((rev) => (
+                {(Array.isArray(reviews) ? reviews : []).map((rev) => (
                   <div
                     key={rev._id}
                     className="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/60 shadow-sm flex flex-col gap-2"
@@ -606,7 +610,7 @@ const CakeDetails = () => {
       </section>
 
       {/* Related Cakes Section */}
-      {relatedCakes && relatedCakes.length > 0 && (
+      {relatedCakes && Array.isArray(relatedCakes) && relatedCakes.length > 0 && (
         <section className="mt-16 pt-12 border-t border-surface-container-high">
           <h2 className="font-headline text-2xl font-bold text-on-surface mb-6">
             You May Also Adore
