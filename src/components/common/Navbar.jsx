@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-surface/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(75,46,43,0.05)] border-b border-surface-container-high/70">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         {/* Strictly Single-Line Header Bar */}
         <div className="h-16 flex items-center justify-between gap-2 sm:gap-4 flex-nowrap">
           {/* 1. Smaller Brand Logo */}
@@ -87,23 +87,12 @@ const Navbar = () => {
             </Link>
             <Link
               to="/contact"
-              className={`text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1 ${
+              className={`text-xs font-bold uppercase tracking-wider transition-colors ${
                 location.pathname === '/contact' ? 'text-primary' : 'text-secondary hover:text-primary'
               }`}
             >
-              <span>Contact</span>
-              <span className="text-[11px] font-mono font-semibold tracking-normal text-primary">(8866265927)</span>
+              Contact
             </Link>
-            <a
-              href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="View Store Location on Google Maps"
-              className="text-xs font-bold uppercase tracking-wider text-secondary hover:text-primary transition-colors flex items-center gap-1"
-            >
-              <span className="material-symbols-outlined text-[17px] text-primary">location_on</span>
-              <span>Map</span>
-            </a>
           </nav>
 
           {/* 3. Search Bar / Popover Toggle */}
@@ -124,27 +113,6 @@ const Navbar = () => {
 
           {/* 4. Right Side Container: Cart and Login Buttons */}
           <div className="ml-auto flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0 flex-nowrap">
-            {/* Quick Map Icon */}
-            <a
-              href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Store Location on Google Maps"
-              aria-label="Google Maps Location"
-              className="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container-low rounded-full transition-colors flex-shrink-0"
-            >
-              <span className="material-symbols-outlined text-[20px]">location_on</span>
-            </a>
-
-            {/* Quick Call Button */}
-            <a
-              href="tel:8866265927"
-              title="Call 8866265927"
-              className="hidden lg:flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/25 text-xs font-bold transition-all flex-shrink-0"
-            >
-              <span className="material-symbols-outlined text-[14px]">call</span>
-              <span className="font-mono text-[11px]">8866265927</span>
-            </a>
 
             {/* Mobile Search Toggle Icon */}
             <button
@@ -339,24 +307,10 @@ const Navbar = () => {
             <Link
               to="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface hover:bg-surface-container-low rounded-xl flex items-center justify-between"
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface hover:bg-surface-container-low rounded-xl"
             >
-              <span>Contact</span>
-              <span className="text-primary font-mono text-xs font-bold">8866265927</span>
+              Contact
             </Link>
-            <a
-              href="https://maps.app.goo.gl/xEMDs6p1rZgFNaqr8"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary hover:bg-surface-container-low rounded-xl flex items-center justify-between"
-            >
-              <span className="flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-[16px]">location_on</span>
-                Store Location (Map)
-              </span>
-              <span className="material-symbols-outlined text-[14px]">open_in_new</span>
-            </a>
             {isAdmin && (
               <Link
                 to="/admin"
